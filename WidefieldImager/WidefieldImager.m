@@ -71,7 +71,8 @@ guidata(handles.WidefieldImager, handles);
 %% initialize camera and set handles
 info = imaqhwinfo;
 handles.vidName = [];
-camCheck = contains(info.InstalledAdaptors, 'pcocameraadaptor');
+    %camCheck = contains(info.InstalledAdaptors, 'pcocameraadaptor');
+camCheck = contains(info.InstalledAdaptors, 'hamamatsu');
 
 if any(camCheck)
 handles.vidName = info.InstalledAdaptors{camCheck}; %PCO camera
@@ -80,7 +81,8 @@ handles.vidObj = checkCamera(handles.vidName, handles); %get PCO video object
 
 % check for other cameras if PCO adaptor is unavailable.
 if isempty(handles.vidObj)
-    disp('PCO camera not available. Searching for other cameras.');
+        %disp('PCO camera not available. Searching for other cameras.');
+    disp('Hamamatsu camera not available. Searching for other cameras.');
     handles.vidName = [];
     if length(info.InstalledAdaptors) == 1
         handles.vidName = info.InstalledAdaptors{1};
@@ -592,6 +594,7 @@ else
     src = getselectedsource(handles.vidObj);
     if strcmpi(handles.vidName,'pcovideoadapter')
         src.E2ExposureTime = 1000/str2double(handles.FrameRate.String) * 1000; %make sure current framerate is used
+        src.ExposureTime = (1000/str2double(handles.FrameRate.String)) / 1000; %make sure current framerate is used
         if str2double(handles.FrameRate.String) > 10 && strcmp(handles.sBinning.String(handles.sBinning.Value),'1')
             warning('FrameRate is above 10Hz at full resolution. This can lead to performance issues.')
         end
@@ -724,7 +727,8 @@ else
                 handles.aNIdevice.startBackground(); %start analog data streaming
             end
             
-            if contains(handles.vidName, 'pcocameraadaptor')
+                %if contains(handles.vidName, 'pcocameraadaptor')
+            if contains(handles.vidName, 'hamamatsu')
                 frameRate = str2double(handles.FrameRate.String);
             else
                 frameRate = str2double(handles.FrameRate.String{handles.FrameRate.Value});
@@ -1175,14 +1179,17 @@ if ~isempty(handles.vidObj)
     stop(handles.vidObj);
     flushdata(handles.vidObj);
     src = getselectedsource(handles.vidObj);
-    if contains(handles.vidName, 'pcocameraadaptor')
+        %if contains(handles.vidName, 'pcocameraadaptor')
+    if contains(handles.vidName, 'hamamatsu')
         if str2double(handles.FrameRate.String) > 10 && strcmp(handles.sBinning.String(handles.sBinning.Value),'1')
             answer = questdlg('Spatial binning is set to 1. This could produce a lot of data. Proceed?');
             if strcmpi(answer,'Yes')
-                src.E2ExposureTime = 1000/str2double(handles.FrameRate.String) * 1000; %set current framerate
+                    %src.E2ExposureTime = 1000/str2double(handles.FrameRate.String) * 1000; %set current framerate
+                src.ExposureTime = 1/str2double(handles.FrameRate.String); %set current framerate
             end
         else
-            src.E2ExposureTime = 1000/str2double(handles.FrameRate.String) * 1000; %set current framerate
+                %src.E2ExposureTime = 1000/str2double(handles.FrameRate.String) * 1000; %set current framerate
+            src.ExposureTime = 1/str2double(handles.FrameRate.String); %set current framerate
         end
     else
         % Adjust frame rate for non-PCO camera. 
@@ -1407,7 +1414,8 @@ function vidObj = checkCamera(adaptorName, handles)
 vidObj = [];
 try
     imaqreset
-    vidObj = videoinput(adaptorName); %get video object
+        %vidObj = videoinput(adaptorName); %get video object
+    vidObj = videoinput(adaptorName, 1, "MONO8_BIN4x4_512x512_Std");
     src = getselectedsource(vidObj);
     
     if contains(adaptorName, 'pcocameraadaptor') %check for PCO camera and set specific settings
