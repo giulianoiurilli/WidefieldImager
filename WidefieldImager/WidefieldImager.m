@@ -640,7 +640,7 @@ else
     
     % inactivate some parts of the GUI so they dont mess with the recording
     set(findall(handles.ExperimentID, '-property', 'enable'), 'enable', 'off')
-    set(findall(handles.ControlPanel, '-property', 'enable'), 'enable', 'inactive')
+    set(findall(handles.ControlPanel, '-property', 'enable'), 'enable', 'off')
     handles.FrameRate.Enable = 'off';
     handles.sBinning.Enable = 'off';
     handles.driveSelect.Enable = 'off';
