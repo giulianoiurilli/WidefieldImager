@@ -117,8 +117,8 @@ colorRange = 0.03; %range of colorscale for dF/F
 
 subplot(1,2,1);
 avgMap = nanmean(nanmean(allData(:,:, stimOn + 1 : end, :),3),4); %show average activity after stimulus onset
-%imageScale(avgMap, colorRange); %show average activity after stimulus onset
-colormap(colormap_blueblackred(256)); colorbar
+% imageScale(avgMap, colorRange); %show average activity after stimulus onset
+% colormap(colormap_blueblackred(256)); colorbar
 title('Stimulus-triggered activity')
 
 %show an activity trace

@@ -45,7 +45,7 @@ else
     gui_mainfcn(gui_State, varargin{:});
 end
 % End initialization code - DO NOT EDIT
-
+end
 
 % --- Executes just before compareMovie is made visible.
 function compareMovie_OpeningFcn(hObject, eventdata, handles, varargin)
@@ -177,7 +177,7 @@ guidata(hObject, handles);
 
 % UIWAIT makes compareMovie wait for user response (see UIRESUME)
 uiwait(hObject);
-
+end
 
 % --- Outputs from this function are returned to the command line.
 function varargout = compareMovie_OutputFcn(hObject, eventdata, handles) 
@@ -195,7 +195,7 @@ else
     handles.UserData.Close = true; %allow close request function to close figure
     guidata(hObject, handles);
 end
-
+end
 % --- Executes on slider movement.
 function FrameSlider_Callback(hObject, eventdata, handles)
 % hObject    handle to FrameSlider (see GCBO)
@@ -212,7 +212,7 @@ drawImage(handles,handles.FrameImage,handles.FrameSlider);
 if ishandle(handles.UserData.frameInd)
 handles.UserData.frameInd.XData = [slideVal slideVal];
 end
-
+end
 % --- Executes during object creation, after setting all properties.
 function FrameSlider_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to FrameSlider (see GCBO)
@@ -223,7 +223,7 @@ function FrameSlider_CreateFcn(hObject, eventdata, handles)
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
-
+end
 
 function MaxColor_Callback(hObject, eventdata, handles)
 % hObject    handle to MaxColor (see GCBO)
@@ -244,7 +244,7 @@ end
 fLength = round(str2double(get(handles.FrameSmth,'string'))); %determines degree of smoothing.
 data = ApplyFilter2(squeeze(handles.UserData.Frames{handles.movieSelect.Value}(:,:,get(handles.FrameSlider,'Value'))),fLength,str2double(handles.FrameSigma.String),get(handles.FilterType,'value'),handles.useAbs.Value); %smooth current frame
 drawImage(handles,handles.FrameImage,handles.FrameSlider);
-
+end
     
 % --- Executes during object creation, after setting all properties.
 function MaxColor_CreateFcn(hObject, eventdata, handles)
@@ -257,7 +257,7 @@ function MaxColor_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
+end
 
 function MinColor_Callback(hObject, eventdata, handles)
 % hObject    handle to MinColor (see GCBO)
@@ -278,7 +278,7 @@ end
 fLength = round(str2double(get(handles.FrameSmth,'string'))); %determines degree of smoothing.
 data = ApplyFilter2(squeeze(handles.UserData.Frames{handles.movieSelect.Value}(:,:,get(handles.FrameSlider,'Value'))),fLength,str2double(handles.FrameSigma.String),get(handles.FilterType,'value'),handles.useAbs.Value); %smooth current frame
 drawImage(handles,handles.FrameImage,handles.FrameSlider);
-
+end
 
 % --- Executes during object creation, after setting all properties.
 function MinColor_CreateFcn(hObject, eventdata, handles)
@@ -291,7 +291,7 @@ function MinColor_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
+end
 
 function FrameSmth_Callback(hObject, eventdata, handles)
 % hObject    handle to FrameSmth (see GCBO)
@@ -306,7 +306,7 @@ if ~isnan(str2double(get(hObject,'string')))
 else
     set(hObject,'string','0')
 end
-
+end
 % --- Executes during object creation, after setting all properties.
 function FrameSmth_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to FrameSmth (see GCBO)
@@ -318,7 +318,7 @@ function FrameSmth_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
+end
 % --- Executes on selection change in FilterType.
 function FilterType_Callback(hObject, eventdata, handles)
 % hObject    handle to FilterType (see GCBO)
@@ -329,7 +329,7 @@ function FilterType_Callback(hObject, eventdata, handles)
 %        contents{get(hObject,'Value')} returns selected item from FilterType
    
 drawImage(handles,handles.FrameImage,handles.FrameSlider);
-
+end
 
 % --- Executes during object creation, after setting all properties.
 function FilterType_CreateFcn(hObject, eventdata, handles)
@@ -342,7 +342,7 @@ function FilterType_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
+end
 
 function FrameSigma_Callback(hObject, eventdata, handles)
 % hObject    handle to FrameSigma (see GCBO)
@@ -358,7 +358,7 @@ if isnan(str2double(get(hObject,'string')))
 else
     FilterType_Callback([],[],handles);
 end
-
+end
 % --- Executes during object creation, after setting all properties.
 function FrameSigma_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to FrameSigma (see GCBO)
@@ -370,7 +370,7 @@ function FrameSigma_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
+end
 % --- Executes on button press in SaveFrame.
 function [ImageOut,areaBounds,areaMask,traceData,tracePosition] = SaveFrame_Callback(hObject, eventdata, handles)
 % hObject    handle to SaveFrame (see GCBO)
@@ -420,22 +420,21 @@ end
 if ~isempty(tracePosition)
     assignin('base','tracePosition',tracePosition);
 end
-
+end
 % --- Executes on button press in SaveFrameBuffer.
 function SaveFrameBuffer_Callback(hObject, eventdata, handles)
 % hObject    handle to SaveFrameBuffer (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+end
 
 function pointerSize_Callback(hObject, eventdata, handles)
 % hObject    handle to pointerSize (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
 % Hints: get(hObject,'String') returns contents of pointerSize as text
 %        str2double(get(hObject,'String')) returns contents of pointerSize as a double
-
+end
 
 % --- Executes during object creation, after setting all properties.
 function pointerSize_CreateFcn(hObject, eventdata, handles)
@@ -448,7 +447,7 @@ function pointerSize_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
+end
 
 % --- Executes on button press in getTrace.
 function getTrace_Callback(hObject, eventdata, handles)
@@ -565,13 +564,14 @@ if size(handles.UserData.Frames{handles.movieSelect.Value},3) > 1
 else
     disp('Traces can only be plotted if more than one frame is provided.')
 end
+end
 
 % --- Executes on button press in CurrentFrameBuffer.
 function CurrentFrameBuffer_Callback(hObject, eventdata, handles)
 % hObject    handle to CurrentFrameBuffer (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+end
 
 % --- Executes on button press in clearTrace.
 function clearTrace_Callback(hObject, eventdata, handles)
@@ -588,14 +588,14 @@ showVerInds.Value = false;
 showHorInds.Value = false;
 
 guidata(hObject, handles);
-
+end
 
 % --- Executes on mouse press over figure background.
 function ShowStack_ButtonDownFcn(hObject, eventdata, handles)
 % hObject    handle to comparemovie (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+end
 
 % --- Executes when user attempts to close comparemovie.
 function ShowStack_CloseRequestFcn(hObject, eventdata, handles)
@@ -611,7 +611,7 @@ else
     guidata(hObject, handles);
     uiresume(hObject);
 end
-
+end
 
 % --- Executes on selection change in pickColormap.
 function pickColormap_Callback(hObject, eventdata, handles)
@@ -625,7 +625,7 @@ function pickColormap_Callback(hObject, eventdata, handles)
 cMap = str2func(strtrim(handles.pickColormap.String{handles.pickColormap.Value}));
 C = cMap(256);
 colormap(handles.FrameImage,C);
-
+end
 
 % --- Executes during object creation, after setting all properties.
 function pickColormap_CreateFcn(hObject, eventdata, handles)
@@ -638,7 +638,7 @@ function pickColormap_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
+end
 
 % --- Executes on button press in ScaleColor.
 function ScaleColor_Callback(hObject, eventdata, handles)
@@ -654,7 +654,7 @@ if hObject.Value
     handles.MinColor.String = num2str(round(double(min(data(:))),4));
     handles.MaxColor.String = num2str(round(double(max(data(:))),4));
 end
-
+end
 % --- Executes on button press in SaveMovie.
 function SaveMovie_Callback(hObject, eventdata, handles)
 % hObject    handle to SaveMovie (see GCBO)
@@ -734,7 +734,7 @@ end
 if exist('v','var')
     close(v);
 end
-    
+end    
 % --- Executes on button press in UseThreshold.
 function UseThreshold_Callback(hObject, eventdata, handles)
 % hObject    handle to UseThreshold (see GCBO)
@@ -742,7 +742,7 @@ function UseThreshold_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 drawImage(handles,handles.FrameImage,handles.FrameSlider);
-
+end
 
 function ImgThresh_Callback(hObject, eventdata, handles)
 % hObject    handle to ImgThresh (see GCBO)
@@ -759,7 +759,7 @@ if isnan(cVal)
 else
     UseThreshold_Callback([], [], handles); %re-draw images.
 end
-
+end
 % --- Executes during object creation, after setting all properties.
 function ImgThresh_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to ImgThresh (see GCBO)
@@ -771,7 +771,7 @@ function ImgThresh_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
+end
 
 % --- Executes on button press in releaseFigure.
 function releaseFigure_Callback(hObject, eventdata, handles)
@@ -780,7 +780,7 @@ function releaseFigure_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 uiresume(gcbf); %return control to matlab
-
+end
 % --- Executes on button press in selectArea.
 function selectArea_Callback(hObject, eventdata, handles)
 % hObject    handle to selectArea (see GCBO)
@@ -838,17 +838,16 @@ if threshold ~= 0
     pause(0.5);
     delete(findall(handles.FrameImage,'Type','hggroup','HandleVisibility','off'));
 end
-
+end
 
 % --- Executes on selection change in areaProp.
 function areaProp_Callback(hObject, eventdata, handles)
 % hObject    handle to areaProp (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
 % Hints: contents = cellstr(get(hObject,'String')) returns areaProp contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from areaProp
-
+end
 
 % --- Executes during object creation, after setting all properties.
 function areaProp_CreateFcn(hObject, eventdata, handles)
@@ -861,7 +860,7 @@ function areaProp_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
+end
 
 % --- Executes on button press in clearAreas.
 function clearAreas_Callback(hObject, eventdata, handles)
@@ -870,7 +869,7 @@ function clearAreas_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 delete(findall(handles.FrameImage.Children,'Type','line')); %delete all lines from images - this should take care of area outlines
-
+end
 
 % --- Executes on button press in closeFigure.
 function closeFigure_Callback(hObject, eventdata, handles)
@@ -879,7 +878,7 @@ function closeFigure_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 ShowStack_CloseRequestFcn(handles.ShowStack, [], handles); %close figure
-
+end
 
 function rotAngel_Callback(hObject, eventdata, handles)
 % hObject    handle to rotAngel (see GCBO)
@@ -895,7 +894,7 @@ if isnan(str2double(get(hObject,'string')))
 else
     FilterType_Callback([],[],handles);
 end
-
+end
 % --- Executes during object creation, after setting all properties.
 function rotAngel_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to rotAngel (see GCBO)
@@ -907,7 +906,7 @@ function rotAngel_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
+end
 
 
 %% Additional functions
@@ -942,7 +941,7 @@ else
     end
 end
 DataOut = padarray(double(DataOut),[1 1],NaN,'both'); %add NaNs to image to see its edge against zero-padded background when rotating.
-
+end
 
 function drawImage(handles,currAxis,cSlider)
 % Short function to draw image to selected axis. 
@@ -980,7 +979,7 @@ if handles.UseThreshold.Value
     ind = thresholdImage(data,str2double(handles.ImgThresh.String));
     set(cImg,'AlphaData',ind); %make values below transparent. Since there is no image below, pixels should appear white.
 end
-
+end
 
 function ind = thresholdImage(data,thresh)
 % quick function to do the thresholding
@@ -992,7 +991,7 @@ elseif thresh < 0
 %     ind = imfill(data < nanstd(data(:))*thresh, 'holes'); %threshold input matrix and make sure there are no holes in separate areas
     ind = imfill(data < thresh, 'holes'); %threshold input matrix and make sure there are no holes in separate areas
 end
-
+end
 
 %additional colormap
 function map = colormap_blueblackred(m)
@@ -1012,8 +1011,9 @@ map=[1 1 0; 1 0.96 0; 1 0.92 0; 1 0.88 0; 1 0.84 0; 1 0.80 0; 1 0.76 0; 1 0.72 0
 map = imresize(map,[m,3]);
 map = map - min(map(:));map = map ./ max(map(:));
 map = map(end:-1:1,:);
+end
 
-function [cm_data]=inferno(m)
+function [cm_data] = inferno(m)
 
 cm = [[  1.46159096e-03,   4.66127766e-04,   1.38655200e-02],
        [  2.26726368e-03,   1.26992553e-03,   1.85703520e-02],
@@ -1281,7 +1281,7 @@ else
     cm_data=hsv2rgb(cm_data);
   
 end
-
+end
 
 function cm_data=viridis(m)
 cm = [[ 0.26700401,  0.00487433,  0.32941519],
@@ -1549,6 +1549,7 @@ else
     cm_data=hsv2rgb(cm_data);
   
 end
+end
 
 % --- Executes on button press in showError.
 function showError_Callback(hObject, eventdata, handles)
@@ -1573,7 +1574,7 @@ for iLines = 1:length(handles.UserData.meanTrace)
         handles.UserData.meanTrace{iLines}.Visible = 'off';
     end
 end
-
+end
 % --- Executes on button press in showOutline.
 function showOutline_Callback(hObject, eventdata, handles)
 % hObject    handle to showOutline (see GCBO)
@@ -1581,7 +1582,7 @@ function showOutline_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of showOutline
-
+end
 
 
 % --- Executes on button press in loadFrame.
@@ -1608,7 +1609,7 @@ if length(size(data.(cField{1}))) == 2
 else
     disp('Selected file must contain a single 2D matrix to plot');
 end
-
+end
 
 % --- Executes on button press in toggleOutline.
 function toggleOutline_Callback(hObject, eventdata, handles)
@@ -1626,7 +1627,7 @@ else
     hold(handles.FrameImage,'off');
 end
 guidata(hObject, handles);
-
+end
 
 % --- Executes on selection change in movieSelect.
 function movieSelect_Callback(hObject, eventdata, handles)
@@ -1653,7 +1654,7 @@ for iTraces = 1 : length(handles.UserData.singleTraces)
         end
     end
 end
-
+end
 
 % --- Executes during object creation, after setting all properties.
 function movieSelect_CreateFcn(hObject, eventdata, handles)
@@ -1666,7 +1667,7 @@ function movieSelect_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
+end
 
 % --- Executes on button press in showTraces.
 function showTraces_Callback(hObject, eventdata, handles)
@@ -1686,7 +1687,7 @@ for iLines = 1 : size(lines,1)
     end
 end
 showError_Callback(hObject, eventdata, handles); drawnow; %re-call error to check if mean-line should be shown
-
+end
 
 % --- Executes on button press in showVerInds.
 function handles = showVerInds_Callback(hObject, eventdata, handles)
@@ -1708,6 +1709,7 @@ if hObject.Value
     end
 end
 guidata(hObject, handles);
+end
 
 % --- Executes on button press in showHorInds.
 function  handles = showHorInds_Callback(hObject, eventdata, handles)
@@ -1730,7 +1732,7 @@ if hObject.Value
     end
 end
 guidata(hObject, handles);
-
+end
 
 % --- Executes on button press in useAbs.
 function useAbs_Callback(hObject, eventdata, handles)
@@ -1739,7 +1741,7 @@ function useAbs_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 drawImage(handles,handles.FrameImage,handles.FrameSlider);
-
+end
 
 % --- Executes on button press in makeFigure.
 function makeFigure_Callback(hObject, eventdata, handles)
@@ -1776,7 +1778,7 @@ if ~isempty(items)
     items = findobj(handles.FrameBuffer,'type','Patch');
     copyobj(items,ax);
 end
-
+end
 
 function verInds_Callback(hObject, eventdata, handles)
 % hObject    handle to verInds (see GCBO)
@@ -1785,7 +1787,7 @@ function verInds_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of verInds as text
 %        str2double(get(hObject,'String')) returns contents of verInds as a double
-
+end
 
 % --- Executes during object creation, after setting all properties.
 function verInds_CreateFcn(hObject, eventdata, handles)
@@ -1798,7 +1800,7 @@ function verInds_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
+end
 
 function horInds_Callback(hObject, eventdata, handles)
 % hObject    handle to horInds (see GCBO)
@@ -1807,7 +1809,7 @@ function horInds_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of horInds as text
 %        str2double(get(hObject,'String')) returns contents of horInds as a double
-
+end
 
 % --- Executes during object creation, after setting all properties.
 function horInds_CreateFcn(hObject, eventdata, handles)
@@ -1819,4 +1821,5 @@ function horInds_CreateFcn(hObject, eventdata, handles)
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
+end
 end
